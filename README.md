@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# BSC PancakeSwap LP Tools
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple react app that will help with calculating the value of LP tokens
 
-## Available Scripts
+## Why?
 
-In the project directory, you can run:
+Tracking the value of LP's seems like it is unfortunately an as-of-yet unsolved problem. Calculating LP value
+is one of the most frequently asked questions in any discord or telegram the author has ever seen, and it's
+frankly not that hard to do... so I decided to automate it.
 
-### `npm start`
+## How?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+All data comes directly from the PancakeSwap LPs themselves (except for BNB price, which comes from binance).
+The formula for calculating the value of an LP looks like:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+token_0_lp_half = token_0_price * token_0_per_lp
+token_1_lp_half = token_1_price * token_1_per_lp
+lp_total_value = token_0_lp_half + token_1_lp_half
+```
 
-### `npm test`
+In this formula there are a few knowns and unknowns; for example, token 1 is BNB, so we can get the
+price from external API's like https://api.binance.com/api/v3/avgPrice?symbol=BNBBUSD . We can also get the
+token per LP values from PancakeSwap's LP contract directly with the following formulas:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+token_0_per_lp = token_0_lp_reserve / total_supply
+token_1_per_lp = token_1_lp_reserve / total_supply
+```
 
-### `npm run build`
+Finally, since we know that each half of the LP will have the same value
+(i.e. `token_0_lp_half` will always equal `token_1_lp_half`), we can
+calculate the value of token_0_price with the following formula:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+token_0_lp_half = token_1_lp_half
+token_0_price = token_0_lp_half / token_0_per_lp
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Why are you shilling $BOG?
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Disclaimer: this is not financial advice, DYOR.**
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Frankly, I don't have the time or expertise to make a solidity token (yet?), but I'd
+like to benefit a little bit from the hours I've put into making
+this site. Asking for donations doesn't really work in my experience, so since I'm long (and super bullish) on 
+[bogtools.io](https://bogtools.io/), the more of you degens that join me in hodling $BOG,
+the better off I'll do, too.

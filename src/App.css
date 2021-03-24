@@ -1,3 +1,12 @@
+.container {
+  margin-top: 3em;
+}
+
+.KeyTokenBadge {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 .App {
   text-align: center;
 }
