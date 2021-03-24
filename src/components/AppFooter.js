@@ -11,7 +11,7 @@ class AppFooter extends React.Component {
             <p>If you appreciate this, please consider donating so I can rationalize taking more
                 days off to make more cool stuff like this.
             </p>
-            <p><a href="">Here's my address</a>. Thanks so much!</p>
+            <p><a href="https://bscscan.com/address/0xE241ecCDE7D927e507c48d1F8c51fbD21dAAbF0f">Here's my address</a>. Thanks so much!</p>
         </div>;
         return (
             <div className="fixed-bottom">  
