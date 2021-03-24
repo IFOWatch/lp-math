@@ -59,9 +59,9 @@ class Pair extends React.Component {
         const token0Price = (token1LPHalf / token0PerLP);
 
         this.setState({
-            token0PerLP: token0PerLP.toFixed(2),
-            token1PerLP: token1PerLP.toFixed(2),
-            token0Price: token0Price.toFixed(2),
+            token0PerLP: token0PerLP,
+            token1PerLP: token1PerLP,
+            token0Price: token0Price,
             loading: false
         })
     }
@@ -84,21 +84,21 @@ class Pair extends React.Component {
                     </Col>
                     <Col xs={2}>
                         <Row>
-                            1 {token0Name} = ${token0Price}
+                            1 {token0Name} = ${token0Price.toFixed(2)}
                         </Row>
                         <Row>
-                            1 {token1Name} = ${token1Price}
+                            1 {token1Name} = ${token1Price.toFixed(2)}
                         </Row>
                     </Col>
                     <Col xs={4}>
                         1 LP = &nbsp;
-                        {this.state.loading ?  loadingStr : token0PerLP} {token0Name} + {this.state.loading ?  loadingStr : token1PerLP} {token1Name}
+                        {this.state.loading ? loadingStr : token0PerLP.toFixed(2)} {token0Name} + {this.state.loading ? loadingStr : token1PerLP.toFixed(2)} {token1Name}
                         &nbsp;
                         &nbsp;
                         <ButtonModal buttonValue="?" modalHeader="How is this calculated?" modalBody={LPReserveCalc}></ButtonModal>
                     </Col>
                     <Col xs={2}>
-                        1 LP = {this.state.loading ?  loadingStr : price} 
+                        1 LP = {this.state.loading ? loadingStr : "$" + price} 
                         &nbsp;
                         &nbsp;
                         <ButtonModal buttonValue="?" modalHeader="How is this calculated?" modalBody={LPCalc}></ButtonModal>

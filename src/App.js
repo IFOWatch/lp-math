@@ -65,7 +65,7 @@ class App extends Component {
   }
 
   render() {
-    const lBnbPrice = this.state.bnbPrice;
+    const lBnbPrice = parseFloat(this.state.bnbPrice);
     const token0PerLP = 0.2;
     const token1PerLP = 0.8;
     const token0Name = "BOG";
